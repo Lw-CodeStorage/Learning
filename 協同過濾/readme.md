@@ -170,7 +170,7 @@ print(f"讀者 1 --> 讀者 6 (距離)：{distance:1.2f} (相似度)：{1-distan
 透過 User-Base 可找出相與目標相似的使用者，設定相似度必須大於0.6，以上述算出結果可找出 <u>讀者1</u> 與 <u>讀者2,3</u> 相似度較高，
 
 我們為 <u>讀者1</u> 進行推薦，先刪除 <u>讀者1</u> 對於 <u>相似的讀者</u> 閱讀過的項目，之後給予相似讀者的項目進行加權計算總和。
-<div style='display:flex;justify-content:space-between'>
+<div style='display:flex !important;justify-content:space-between'>
 <img src="./img/UserBase_ex01.png" width="50%">
 <img src="./img/UserBase_ex02.png" width="50%">
 </div>
