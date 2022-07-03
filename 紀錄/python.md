@@ -8,6 +8,6 @@
     3. 建立虛擬環境 cmd python -m venv '虛擬環境變數名稱'
     4. 進入建立完成的虛擬環境 => ./'虛擬環境變數名稱'/Scripts 輸入activate 
 # 將虛擬環境整合進入 jupyter note 
-    *jupyter kernelspec list 查詢 jupyter kernel list 
-    1. 進入新建的虛擬環境Scripts CMD pip install ipykernel
-    2. 加入jupyter kernell 中 python -m ipykernel install --user --name=v03
+    > *jupyter kernelspec list 查詢 jupyter kernel list 
+    > 進入新建的虛擬環境Scripts CMD pip install ipykernel
+    > 加入jupyter kernell 中 python -m ipykernel install --user --name=v03
