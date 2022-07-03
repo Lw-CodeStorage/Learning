@@ -12,5 +12,6 @@
     > 進入新建的虛擬環境Scripts CMD pip install ipykernel
     > 加入jupyter kernell 中 python -m ipykernel install --user --name=v03
 # 將虛擬環境整合進入 jupyter note 
-    > git clone 要修改的專案
+    > git clone 要修改的專案 // 第一次 專案初始時使用
+    > git pull  // 若有人更新項目 需透過pull
     
