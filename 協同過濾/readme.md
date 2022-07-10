@@ -170,10 +170,82 @@ print(f"讀者 1 --> 讀者 6 (距離)：{distance:1.2f} (相似度)：{1-distan
 透過 User-Base 可找出相與目標相似的使用者，設定相似度必須大於0.6，以上述算出結果可找出 <u>讀者1</u> 與 <u>讀者2,3</u> 相似度較高，
 
 我們為 <u>讀者1</u> 進行推薦，先刪除 <u>讀者1</u> 對於 <u>相似的讀者</u> 閱讀過的項目，之後給予相似讀者的項目進行加權計算總和。
+### **為一位讀者進行推薦：選取最相似的兩位讀者所評分的書籍，進行加權，然後推薦加權分數最高且目標讀者未評分過的書籍。**
 <div style='display:flex !important;justify-content:space-between'>
 <img src="./img/UserBase_ex01.png" width="50%">
 <img src="./img/UserBase_ex02.png" width="50%">
 </div>
 <img src="./img/UserBase_ex03.png" width="100%">
 
-**為一位讀者進行推薦：選取最相似的兩位讀者所評分的書籍，進行加權，然後推薦加權分數最高且目標讀者未評分過的書籍。**
+
+
+# 三、IBCF 實例
+
+## 介紹
+
+基於 ITEM-BASE，需要做的事情也是計算相似矩陣，但與UBCF不同的事，需要關注的item(書籍)、而非User(讀者)的相似性，
+<font color='orange'>換言之可理解為矩陣特徵(Column)變為User，關係為書籍對使用者的分數</font>，需要計算出一本書與其他書的相似性，使用評分過的一本屬的讀者向量表示這本書籍，並比較這些向量餘弦的相似性。
+
+>由下面的相似矩陣,可以看出第一本書最類似第五本書
+
+<img src="./img/ItemBase_ex01.png" width="60%">
+
+<img src="./img/ItemBase_ex02.png" width="60%">
+
+```python
+import scipy
+from scipy.spatial.distance import cosine
+
+book1 = [4, 5, 4, 0, 0, 0] #書籍 1 讀者給的評分
+book2 = [3, 0, 0, 3, 4, 0] #書籍 2 讀者給的評分
+book3 = [0, 4, 5, 0, 0, 2] #書籍 3 讀者給的評分
+book4 = [0, 0, 3, 0, 0, 4] #書籍 4 讀者給的評分
+book5 = [5, 4, 4, 0, 0, 0] #書籍 5 讀者給的評分
+book6 = [0, 0, 0, 5, 4, 5] #書籍 6 讀者給的評分
+#計算餘弦距離
+print("* 餘弦距離：")
+distance = cosine(book1, book1)
+print(f"書籍 1 --> 書籍 1 (距離)：{distance:1.2f} (相似度)：{1-distance:1.2f}")
+distance = cosine(book1, book2)
+print(f"書籍 1 --> 書籍 2 (距離)：{distance:1.2f} (相似度)：{1-distance:1.2f}")
+distance = cosine(book1, book3)
+print(f"書籍 1 --> 書籍 3 (距離)：{distance:1.2f} (相似度)：{1-distance:1.2f}")
+distance = cosine(book1, book4)
+print(f"書籍 1 --> 書籍 4 (距離)：{distance:1.2f} (相似度)：{1-distance:1.2f}")
+distance = cosine(book1, book5)
+print(f"書籍 1 --> 書籍 5 (距離)：{distance:1.2f} (相似度)：{1-distance:1.2f}")
+distance = cosine(book1, book6)
+print(f"書籍 1 --> 書籍 6 (距離)：{distance:1.2f} (相似度)：{1-distance:1.2f}")
+* 餘弦距離：
+# 書籍 1 --> 書籍 1 (距離)：0.00 (相似度)：1.00
+# 書籍 1 --> 書籍 2 (距離)：0.73 (相似度)：0.27
+# 書籍 1 --> 書籍 3 (距離)：0.21 (相似度)：0.79
+# 書籍 1 --> 書籍 4 (距離)：0.68 (相似度)：0.32
+# 書籍 1 --> 書籍 5 (距離)：0.02 (相似度)：0.98
+# 書籍 1 --> 書籍 6 (距離)：1.00 (相似度)：0.00
+```
+透過書籍之間的相似性，可得出一位讀者所評分過的書籍與其他書籍的相關性，再以此進行推薦，以第一位使用者為例，評分過的書為第一、二、五本，透過書籍之間的相似矩陣，扣除重複推薦與已經評分過的，可以推薦第一位讀者第三本、第六本
+
+<img src="./img/ItemBase_ex03.png" width="50%">
+
+
+### **為讀者進行推薦：選取他們評分過的書籍，找出與它們最相似的前兩本書籍，進行加權，然後推薦給讀者加權分最高且他沒有讀過的書籍**
+<div style='display:flex !important;justify-content:space-between'>
+<img src="./img/ItemBase_ex01.png" width="50%">
+<img src="./img/ItemBase_ex02.png" width="50%">
+</div>
+<img src="./img/ItemBase_ex04.png" width="100%">
+
+基於 User 和基於 Item 的協同過濾的描述聽起來非常相似，但是它們可以產生不同的推薦結果。即使在這裡給出的簡易的例子中，使用的數據相同，這兩種方法產生對於同一 User 產生的推薦結果也不相同。當構建推薦系統的時候，這兩種協同
+過濾方式都是值得考慮的，在實踐中，他們可以產生不同的結果，為 User 提供了不同的體驗。
+
+## 小結
+
+- 當客戶群體很大時，使用userBase進行分析，相似矩陣會非常龐大，可使用itembase進行計算會比較快速，抑或是以天數的方式更新相似矩陣作為模型保存(目前實務上有用到的方法)，相反若商品為主的系統，可使用userBase加速運算，或是使用上述保存模型的方式避免計算耗時
+
+- UserBase CF 容易推薦最多使用者關聯購買的項目，可以理解為推薦的項目可能都會是熱銷商品，若希望挖掘一些非熱銷但高關聯的產品可以考慮使用ItemBase，可能比較有機會關聯出平常不顯著的商品
+
+- 實務上在系統剛上正式，可能會遇到冷啟動的問題，USER初始資料匱乏，或剛推出的項目沒有點擊記錄之類的，這也是必須考量的項目
+
+
+# 二 推薦系統範例
