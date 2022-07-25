@@ -7,6 +7,7 @@
 ## DEAP 使用與簡介 https://zhuanlan.zhihu.com/p/436438875
 
 ## DEAP OneMax example
+- https://deap.readthedocs.io/en/master/examples/index.html#genetic-algorithm-ga
 - https://zhuanlan.zhihu.com/p/436424904
 - https://blog.csdn.net/weixin_42028364/article/details/81539117
 # Deap 安裝
@@ -34,6 +35,9 @@
 ## * 基因規劃種類
     - 非線性規劃 (例如:圖像還原，投資組合)
     - 整數規劃 (例如:TSP、JAP)
+    ---
+    - 二進制 : 函示求解、圖像還原(各類使用與否)
+    - 整數型 :tsp
 # 選擇複製
 
 某種情境下的組合，可能都是由特定的組合構成，
