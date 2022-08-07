@@ -81,6 +81,7 @@ Crossover，Mutation的機率是低滿多的）
 - https://www.iot.gov.tw/cp-91-70754-eb7ba-1.html
 - http://enger.thu.edu.tw/files/archive/115_3eddd8d8.pdf
 - http://ir.lib.ncut.edu.tw/bitstream/987654321/5566/2/%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95%E5%9C%A8%E9%A2%A8%E8%83%BD%E5%87%BD%E6%95%B8%E5%8F%83%E6%95%B8%E4%B9%8B%E4%BC%B0%E7%AE%97.pdf
+- https://ir.nctu.edu.tw/bitstream/11536/41487/1/352601.pdf
 # 套件 
 - https://pygad.readthedocs.io/en/latest/
 - https://deap.readthedocs.io/en/master/index.html
