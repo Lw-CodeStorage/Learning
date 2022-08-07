@@ -1,29 +1,27 @@
 
-# Source 
-## GA   解說 https://dotblogs.com.tw/dragon229/2013/01/03/86692
-## 供單排程優化 https://medium.com/qiubingcheng/%E4%BB%A5python%E5%AF%A6%E4%BD%9C%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95-genetic-algorithm-ga-%E4%B8%A6%E8%A7%A3%E6%B1%BA%E5%B7%A5%E4%BD%9C%E6%8C%87%E6%B4%BE%E5%95%8F%E9%A1%8C-job-assignment-problem-jap-b0d7c4ad6d0f
-## DEAP 文件 https://www.1ju.org/ai-with-python/ai-with-python-genetic-algorithms
-## DEAP TSP https://ithelp.ithome.com.tw/articles/10262059
-## DEAP 使用與簡介 https://zhuanlan.zhihu.com/p/436438875
-
-## DEAP OneMax example
-- https://deap.readthedocs.io/en/master/examples/index.html#genetic-algorithm-ga
-- https://zhuanlan.zhihu.com/p/436424904
-- https://blog.csdn.net/weixin_42028364/article/details/81539117
-# Deap 安裝
-## error 
-- 遇到pip instapp deap (error: metadata-generation-failed) 降版本 => install setuptools==57.0.0
 
 
-# 何謂基因演算法
+
+
+# 何謂GA算法
 
 依具生物環境適者生存的特性，模擬出來的演算法，利用選擇、組合、突變的方式找出更優良的基因組合。
 
 我們可以將基因理解程一種解法的組合，透過自訂的適應函數與適應度，找出問題的次佳解，基本上此類演算法為解決<font style='color:deeppink'>組合最佳化問題的工具</font>。
 
 
-# 為何需要基因演算法
+# 為何需要GA算法
 當組合最佳化問題很小的時候，可以透過暴力解找出最佳組合沒問題，但當組合過大需要全部可行的解在有限的時間計算完畢有困難時，基因演算就可做為解決這種問題的工具，此類問題通常為NP問題。值得注意的是基因演算法找到的解不一定為最佳解
+
+
+# GA主要特性
+
+- 以參數編碼的方式進行運算而不是參數本身，因此可以跳脱搜尋空間上的限制。
+
+- 結果較具可解釋性，可透過適應函數解釋染色體基因排序
+- 遺傳演算法使用機率規則方式去引導搜尋方向，屬於盲目
+的搜尋方法，而不是採用明確的規則，因此較能符合各種
+不同類型的最佳化問題。
 
 # 流程
 1. <font style='color:deeppink'>亂數N個基因</font>做為群體
@@ -36,7 +34,6 @@
   - 二元編碼 : 適用於01背包問題、選擇問題、整數規劃問題，搜尋空間為2^L
   - 排列編碼 : 適用於排列有序問題，tsp、jap 等等，搜尋空間為 L!
   - 實數編碼 : 適用教具複雜數值問題，搜尋空間為n^L，這類問題通常需限定基因上下限(此次消耗最佳化專案搜索空間為產品製作數量上限)
-  - 
 
 # 交配
 
@@ -78,3 +75,15 @@ Crossover，Mutation的機率是低滿多的）
 ## GA 應用限制
 - 染色體以離散方式描述問題，較難求解連續邊數(這邊指的是可能不是最佳或速度較慢)
 - GA 是將問題的可解組合以編碼方式組成染色體，當問題的可解組合過多，染色體長度過長，將導致收斂時間過長或收斂效果不佳
+
+# Ref
+- https://medium.com/qiubingcheng/%E4%BB%A5python%E5%AF%A6%E4%BD%9C%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95-genetic-algorithm-ga-%E4%B8%A6%E8%A7%A3%E6%B1%BA%E5%B7%A5%E4%BD%9C%E6%8C%87%E6%B4%BE%E5%95%8F%E9%A1%8C-job-assignment-problem-jap-b0d7c4ad6d0f
+- https://www.iot.gov.tw/cp-91-70754-eb7ba-1.html
+- http://enger.thu.edu.tw/files/archive/115_3eddd8d8.pdf
+- http://ir.lib.ncut.edu.tw/bitstream/987654321/5566/2/%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95%E5%9C%A8%E9%A2%A8%E8%83%BD%E5%87%BD%E6%95%B8%E5%8F%83%E6%95%B8%E4%B9%8B%E4%BC%B0%E7%AE%97.pdf
+# 套件 
+- https://pygad.readthedocs.io/en/latest/
+- https://deap.readthedocs.io/en/master/index.html
+
+# error 
+- 遇到pip instapp deap (error: metadata-generation-failed) 降版本 => install setuptools==57.0.0
