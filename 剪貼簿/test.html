@@ -12,6 +12,7 @@
 <body>
 
     <button>Get Clipboard</button>
+    <input id="myfile" type="file" name="myFile">
 </body>
 
 </html>
@@ -24,20 +25,31 @@
     //     });
     // });
     button.addEventListener('click', async function () {
+        //這個做法通常win+v有值才有效果
         try {
             //await navigator.clipboard.read().then(data=>console.log(data));
             const clipboardItems = await navigator.clipboard.read();
             for (const clipboardItem of clipboardItems) {
                 for (const type of clipboardItem.types) {
                     const blob = await clipboardItem.getType(type);
-                    const text = await blob.text()
+                    const text = await blob.text()
                     console.log(blob);
                     console.log(text);
-                
+
                 }
             }
         } catch (err) {
             console.error(err.name, err.message);
         }
     })
+    window.addEventListener('paste', e => {
+        //debugger
+        console.log(e.clipboardData.files)
+        if(e.clipboardData.files.length > 0){
+            const fileinput = document.querySelector("#myfile")
+            fileinput.files = e.clipboardData.files
+        }
+    });
+
+    
 </script>
