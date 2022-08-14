@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+</head>
+
+<body>
+
+    <button>Get Clipboard</button>
+</body>
+
+</html>
+
+<script>
+    const button = document.querySelector('button');
+    // button.addEventListener('click', function () {
+    //     navigator.clipboard.readText().then(text => {
+    //         console.log(text) // 剪貼簿中的文本內容
+    //     });
+    // });
+    button.addEventListener('click', async function () {
+        try {
+            //await navigator.clipboard.read().then(data=>console.log(data));
+            const clipboardItems = await navigator.clipboard.read();
+            for (const clipboardItem of clipboardItems) {
+                for (const type of clipboardItem.types) {
+                    const blob = await clipboardItem.getType(type);
+                    const text = await blob.text()
+                    console.log(blob);
+                    console.log(text);
+                
+                }
+            }
+        } catch (err) {
+            console.error(err.name, err.message);
+        }
+    })
+</script>
