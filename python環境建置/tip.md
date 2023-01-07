@@ -11,9 +11,11 @@
     > *jupyter kernelspec list 查詢 jupyter kernel list 
     > 進入新建的虛擬環境Scripts CMD pip install ipykernel
     > 加入jupyter kernell 中 python -m ipykernel install --user --name=v03
-# 將虛擬環境整合進入 jupyter note 
+# git
     > git clone 要修改的專案 // 第一次 專案初始時使用
     > git pull  // 若有人更新項目 需透過pull
 # vscode 無法執行虛擬環境
     > https://www.youtube.com/watch?v=vc-5H4B5C4M&ab_channel=CodeAdhyayana
+# vscdeo 自動切換virtual發生問題
+    https://akoncc.github.io/2019/11/01/vscode-cant-run-script/
     
